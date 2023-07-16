@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+
+.alert.alert-success .close {
+    position: relative;
+    top: -2px;
+    right: -10px;
+    color: black;
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    font-weight: bold;
+    cursor: pointer;
+  }  

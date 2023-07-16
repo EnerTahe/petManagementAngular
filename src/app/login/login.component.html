@@ -1,0 +1,43 @@
+<section class="text-center text-lg-start">
+
+  <div class="container py-4">
+    <div class="row g-0 align-items-center">
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <div class="card cascading-right" style="
+            background: hsla(0, 0%, 100%, 0.55);
+            backdrop-filter: blur(30px);
+            ">
+          <div class="card-body p-5 shadow-5 text-center">
+            <h2 class="fw-bold mb-5">Log in</h2>
+            <form (ngSubmit)="login()">
+              <!-- Add the error message div -->
+          <div *ngIf="loginError" class="alert alert-danger mb-3">
+            Incorrect username or password. Please try again.
+          </div>
+              <div class="form-outline mb-4">
+                <input type="text" id="username" [(ngModel)]="username" name="username" placeholder="Enter username"
+                  class="form-control" />
+                <label class="form-label" for="username">Username</label>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Enter password"
+                  class="form-control" />
+                <label class="form-label" for="password">Password</label>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block mb-4">
+                Log in
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <img src="https://i.pinimg.com/736x/ab/0c/d8/ab0cd8366f11b88d36298ca8041e2048.jpg"
+          class="w-75 rounded-4 shadow-4" alt="" />
+      </div>
+    </div>
+  </div>
+</section>

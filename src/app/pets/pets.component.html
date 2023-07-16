@@ -1,0 +1,119 @@
+<div class="container">
+    
+    <div class="alert alert-success mt-3 d-flex justify-content-between align-items-center" *ngIf="showSuccessAlert" role="alert">
+        <span>New pet was added successfully!</span>
+        <button type="button" class="close" (click)="hideSuccessAlert()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <div class="py-5 text-center">
+        <h2>Pets</h2>
+    </div>
+
+    <div class="row">
+        <button type="button" class="btn btn-primary" (click)="resetNewPet(); editMode = false;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Add pet
+</button>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Fur color</th>
+                    <th scope="col">Country</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pet of pets; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{pet.name}}</td>
+                    <td>{{pet.id}}</td>
+                    <td>{{pet.type}}</td>
+                    <td>{{pet.color}}</td>
+                    <td>{{pet.country}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" (click)="editPet(pet)" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Edit pet
+                          </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+ <!-- Modal -->
+ <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+ aria-labelledby="staticBackdropLabel" aria-hidden="true">
+ <div class="modal-dialog">
+     <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">{{ editMode ? 'Edit pet' : 'Add new pet' }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+         <div class="modal-body">
+             <form #petForm="ngForm" (ngSubmit)="addOrUpdatePet()">
+                <div class="mb-3">
+                  <label for="pet-name" class="col-form-label">Name:</label>
+                  <input type="text" class="form-control" id="pet-name" [(ngModel)]="newPet.name" name="pet-name" required>
+                  <div *ngIf="petForm.controls['pet-name'].invalid && (petForm.controls['pet-name'].dirty || petForm.controls['pet-name'].touched)" class="text-danger">
+                    Name is required.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="type" class="col-form-label">Type:</label>
+                  <select class="form-control" id="type" [(ngModel)]="newPet.type" name="pet-type" required>
+                    <option value="" disabled selected>Select a pet type</option>
+                    <option value="Cat">Cat</option>
+                    <option value="Dog">Dog</option>
+                    <option value="Horse">Horse</option>
+                  </select>
+                  <div *ngIf="petForm.controls['pet-type'].invalid && (petForm.controls['pet-type'].dirty || petForm.controls['pet-type'].touched)" class="text-danger">
+                    Type is required.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="fur-color" class="col-form-label">Fur color:</label>
+                  <select class="form-control" id="fur-color" [(ngModel)]="newPet.color" name="fur-color" required>
+                    <option value="" disabled selected>Select a fur color</option>
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
+                    <option value="Brown">Brown</option>
+                    <option value="Gray">Gray</option>
+                    <option value="Golden">Golden</option>
+                    <option value="Red">Red</option>
+                    <option value="Cream">Cream</option>
+                    <option value="Fawn">Fawn</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Tan">Tan</option>
+                  </select>
+                  <div *ngIf="petForm.controls['fur-color'].invalid && (petForm.controls['fur-color'].dirty || petForm.controls['fur-color'].touched)" class="text-danger">
+                    Fur color is required.
+                  </div>
+                </div>
+                <div class="mb-3">
+                    <label for="country-of-origin" class="col-form-label">Country of origin:</label>
+                    <select class="form-control" id="country-of-origin" [(ngModel)]="newPet.country" name="country-of-origin">
+                        <option value="" disabled selected>Select a Country of origin</option>
+                        <option value=""></option>
+                        <option value="Estonia">Estonia</option>
+                        <option value="Latvia">Latvia</option>
+                        <option value="Lithuania">Lithuania</option>
+                        <option value="Sweden">Sweden</option>
+                        <option value="Finland">Finland</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="!petForm.valid">Save</button>
+                </div>
+            </form>
+        
+        </div>
+    </div>
+</div>
+</div>
